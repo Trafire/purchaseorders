@@ -5,11 +5,11 @@ if sys.executable != INTERP:
 sys.path.append(os.getcwd())
 
 
-from flask import Flask, render_template
+from flask import Flask
 application = Flask(__name__)
 
 
-
+@application.route('login')
 @application.route('/')
 def index():
     return render_template('login.html')

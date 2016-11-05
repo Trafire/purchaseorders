@@ -12,4 +12,4 @@ application = Flask(__name__)
 
 @application.route('/')
 def index():
-    return "dfadfs"#render_template('login.html')
+    return render_template("login.html")

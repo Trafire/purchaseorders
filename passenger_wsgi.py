@@ -9,7 +9,7 @@ from flask import Flask, render_template
 application = Flask(__name__)
 
 
-@application.route('/')
+@application.route('/login')
 def index():
     return render_template("login.html")
 

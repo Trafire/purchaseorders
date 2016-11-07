@@ -8,6 +8,7 @@ sys.path.append(os.getcwd())
 from flask import Flask, render_template
 application = Flask(__name__)
 application.config.from_object('config')
+application.config.from_pyfile('config.py')
 
 @application.route('/login')
 @application.route('/')

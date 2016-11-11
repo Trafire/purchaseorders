@@ -16,8 +16,7 @@ application = Flask(__name__)
 application.config.from_object('config')
 application.config.from_pyfile('config.py')
 
-db = SQLAlchemy(application)                            # Initialize Flask-SQLAlchemy
-mail = Mail(application)                                # Initialize Flask-Mail
+
 
 
 ########User Setup#############
@@ -40,10 +39,12 @@ class User(db.Model, UserMixin):
     def is_active(self):
       return self.is_enabled
 
-# Setup Flask-User
+# Create all database tables
 db.create_all()
+
+# Setup Flask-User
 db_adapter = SQLAlchemyAdapter(db, User)        # Register the User model
-user_manager = UserManager(db_adapter, application)     # Initialize Flask-User      
+user_manager = UserManager(db_adapter, app)     # Initialize Flask-User 
 
 ######## Routes #############
 

@@ -1,14 +1,16 @@
 import sys, os
-from flask import Flask, render_template, request
-from flask_mail import Mail
-from flask_sqlalchemy import SQLAlchemy
-from flask_user import login_required, UserManager, UserMixin, SQLAlchemyAdapter
+
 
 INTERP = os.path.join(os.environ['HOME'], 'purchaseorders.fleurametztoronto.com', 'bin', 'python')
 
 if sys.executable != INTERP:
     os.execl(INTERP, INTERP, *sys.argv)
 sys.path.append(os.getcwd())
+
+from flask import Flask, render_template, request
+from flask_mail import Mail
+from flask_sqlalchemy import SQLAlchemy
+from flask_user import login_required, UserManager, UserMixin, SQLAlchemyAdapter
 
 application = Flask(__name__)
 application.config.from_object('config')

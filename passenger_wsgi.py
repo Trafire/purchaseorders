@@ -23,7 +23,7 @@ mail = Mail(application)                                # Initialize Flask-Mail
 ########User Setup#############
 
 class User(db.Model, UserMixin):
-# User Authentication information
+    # User Authentication information
     username = db.Column(db.String(50), nullable=False, unique=True)
     password = db.Column(db.String(255), nullable=False, default='')
     reset_password_token = db.Column(db.String(100), nullable=False, default='')
@@ -41,6 +41,7 @@ class User(db.Model, UserMixin):
       return self.is_enabled
 
 # Setup Flask-User
+db.create_all()
 db_adapter = SQLAlchemyAdapter(db, User)        # Register the User model
 user_manager = UserManager(db_adapter, application)     # Initialize Flask-User      
 

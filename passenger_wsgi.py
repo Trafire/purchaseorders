@@ -10,9 +10,12 @@ application = Flask(__name__)
 application.config.from_object('config')
 application.config.from_pyfile('config.py')
 
-@application.route('/login')
+@application.route('/login',methods=["POST","GET"])
 def login():
-    return render_template("login.html")
+    if request.method == 'POST': 
+        return render_template("index.html")
+    else:
+        return render_template("login.html")
 
 @application.route('/')
 def index():

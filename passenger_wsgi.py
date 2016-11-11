@@ -12,15 +12,15 @@ from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
 from flask_user import login_required, UserManager, UserMixin, SQLAlchemyAdapter
 
-application = Flask(__name__)
-application.config.from_object('config')
-application.config.from_pyfile('config.py')
+app = Flask(__name__)
+app.config.from_object('config')
+app.config.from_pyfile('config.py')
 
 
 
 # Initialize Flask extensions
-db = SQLAlchemy(application)                            # Initialize Flask-SQLAlchemy
-mail = Mail(application)                                # Initialize Flask-Mail
+db = SQLAlchemy(app)                            # Initialize Flask-SQLAlchemy
+mail = Mail(app)                                # Initialize Flask-Mail
 
 ########User Setup#############
 
@@ -49,22 +49,22 @@ db.create_all()
 
 # Setup Flask-User
 db_adapter = SQLAlchemyAdapter(db, User)        # Register the User model
-user_manager = UserManager(db_adapter, application)     # Initialize Flask-User 
+user_manager = UserManager(db_adapter, app)     # Initialize Flask-User 
 
 ######## Routes #############
 
-@application.route('/login',methods=["POST","GET"])
+@app.route('/login',methods=["POST","GET"])
 def login():
     if request.method == 'POST': 
         return render_template("index.html")
     else:
         return render_template("login.html")
 
-@application.route('/')
+@app.route('/')
 def index():
     return render_template("index.html")
 
-@application.route('/register', methods=["POST","GET"])
+@app.route('/register', methods=["POST","GET"])
 def register():
     error = None
     if request.method == 'POST':
@@ -82,7 +82,7 @@ def register():
     else:
         return render_template("registration.html")
 
-@application.route('/members')
+@app.route('/members')
 @login_required
 def members_page():
     return render_template_string("members.html")

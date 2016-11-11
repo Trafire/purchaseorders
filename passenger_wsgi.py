@@ -16,6 +16,9 @@ application = Flask(__name__)
 application.config.from_object('config')
 application.config.from_pyfile('config.py')
 
+db = SQLAlchemy(application)                            # Initialize Flask-SQLAlchemy
+mail = Mail(application)                                # Initialize Flask-Mail
+
 
 ########User Setup#############
 
@@ -23,7 +26,7 @@ class User(db.Model, UserMixin):
 # User Authentication information
     username = db.Column(db.String(50), nullable=False, unique=True)
     password = db.Column(db.String(255), nullable=False, default='')
-    reset_password_token = db.Column(db.String(100), nullable=False, default='
+    reset_password_token = db.Column(db.String(100), nullable=False, default='')
 
     # User Email information
     email = db.Column(db.String(255), nullable=False, unique=True)
@@ -39,7 +42,7 @@ class User(db.Model, UserMixin):
 
 # Setup Flask-User
 db_adapter = SQLAlchemyAdapter(db, User)        # Register the User model
-user_manager = UserManager(db_adapter, app)     # Initialize Flask-User      
+user_manager = UserManager(db_adapter, application)     # Initialize Flask-User      
 
 ######## Routes #############
 

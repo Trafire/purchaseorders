@@ -15,12 +15,24 @@ application.config.from_pyfile('config.py')
 def index():
     return render_template("login.html")
 
-
+'''
 @application.route('/registration')
 def registration():
     return render_template("registration.html")
+'''
 
-@application.route('/register', methods=["POST"])
+@application.route('/register', methods=["POST","GET"])
 def register():
-    name = request.form['name']
-    return render_template("register.html",name=name)
+    error = None
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        psw = request.form['psw']
+        if "@fleurametz.com" not in email:
+            error = "Must Register with FleuraMetz Email"
+            return render_template("failure.html",error=error)
+            
+        
+        return render_template("register.html",name=name,email=email,psw=psw)
+    else:
+        return render_template("registration.html")

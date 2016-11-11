@@ -8,8 +8,7 @@ if sys.executable != INTERP:
 sys.path.append(os.getcwd())
 
 from flask import Flask, render_template, request
-
-
+from flask_user import login_required
 
 app = Flask(__name__)
 app.config.from_object('config')

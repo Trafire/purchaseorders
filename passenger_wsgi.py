@@ -20,7 +20,7 @@ def index():
 def registration():
     return render_template("registration.html")
 
-@application.route('/register', methods=["POST"]))
+@application.route('/register', methods=["POST"])
 def register():
     name = request.form['name']
     return render_template("register.html",name=name)

@@ -15,3 +15,9 @@ application.config.from_pyfile('config.py')
 def index():
     return render_template("login.html")
 
+
+@application.route('/registration')
+def register():
+    return render_template("registration.html")
+
+

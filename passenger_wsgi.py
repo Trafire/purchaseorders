@@ -18,6 +18,9 @@ application.config.from_pyfile('config.py')
 
 
 
+# Initialize Flask extensions
+db = SQLAlchemy(application)                            # Initialize Flask-SQLAlchemy
+mail = Mail(application)                                # Initialize Flask-Mail
 
 ########User Setup#############
 

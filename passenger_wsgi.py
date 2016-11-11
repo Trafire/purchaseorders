@@ -22,5 +22,5 @@ def registration():
 
 @application.route('/register', methods=["POST"])
 def register():
-    name = request.form['name']
-    return render_template("register.html",name=name)
+    #name = request.form['name']
+    return render_template("register.html")#,name=name)

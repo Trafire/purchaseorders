@@ -17,9 +17,10 @@ def index():
 
 
 @application.route('/registration')
-def register():
+def registration():
     return render_template("registration.html")
 
 @application.route('/register', methods=["POST"]))
 def register():
-    return request.form
+    name = request.form['name']
+    return render_template("register.html",name=name)

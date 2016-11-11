@@ -28,10 +28,10 @@ def registration():
 def register():
     error = None
     if request.method == 'POST':
-        name = request.form['name']
-        email = request.form['email']
-        psw = request.form['psw']
-        if "@fleurametz.com" not in email:
+        name = request.form['name'].strip()
+        email = request.form['email'].strip()
+        psw = request.form['psw'].strip()
+        if email[-15:] == "@fleurametz.com":
             error = "Must Register with FleuraMetz Email"
             return render_template("failure.html",error=error)
             

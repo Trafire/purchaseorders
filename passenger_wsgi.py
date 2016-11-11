@@ -8,48 +8,13 @@ if sys.executable != INTERP:
 sys.path.append(os.getcwd())
 
 from flask import Flask, render_template, request
-from flask_mail import Mail
-from flask_sqlalchemy import SQLAlchemy
-from flask_user import login_required, UserManager, UserMixin, SQLAlchemyAdapter
+
+
 
 app = Flask(__name__)
 app.config.from_object('config')
 app.config.from_pyfile('config.py')
 
-
-
-# Initialize Flask extensions
-db = SQLAlchemy(app)                            # Initialize Flask-SQLAlchemy
-mail = Mail(app)                                # Initialize Flask-Mail
-
-########User Setup#############
-
-class User(db.Model, UserMixin):
-    __tablename__ = 'User'
-    # User Authentication information
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), nullable=False, unique=True)
-    password = db.Column(db.String(255), nullable=False, default='')
-    reset_password_token = db.Column(db.String(100), nullable=False, default='')
-
-    # User Email information
-    email = db.Column(db.String(255), nullable=False, unique=True)
-    confirmed_at = db.Column(db.DateTime())
-
-    # User information
-    is_enabled = db.Column(db.Boolean(), nullable=False, default=False)
-    first_name = db.Column(db.String(50), nullable=False, default='')
-    last_name = db.Column(db.String(50), nullable=False, default='')
-
-    def is_active(self):
-      return self.is_enabled
-
-# Create all database tables
-db.create_all()
-
-# Setup Flask-User
-db_adapter = SQLAlchemyAdapter(db, User)        # Register the User model
-user_manager = UserManager(db_adapter, app)     # Initialize Flask-User 
 
 ######## Routes #############
 

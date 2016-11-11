@@ -5,7 +5,7 @@ if sys.executable != INTERP:
 sys.path.append(os.getcwd())
 
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 application = Flask(__name__)
 application.config.from_object('config')
 application.config.from_pyfile('config.py')
@@ -22,5 +22,5 @@ def registration():
 
 @application.route('/register', methods=["POST"])
 def register():
-    #email = request.form['email']
-    return render_template("register.html",name="me")
+    name = request.form['name']
+    return render_template("register.html",name=name)

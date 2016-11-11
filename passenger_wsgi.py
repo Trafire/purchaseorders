@@ -37,6 +37,10 @@ def register():
         if email[-15:] == "@fleurametz.com":
             error = "Must Register with FleuraMetz Email"
             return render_template("failure.html",error=error)
+        elseif name == '' or email == '' or psw == '':
+            error = "Must fill in all fields"
+            return render_template("failure.html", error=error)
+            
             
         
         return render_template("register.html",name=name,email=email,psw=psw)

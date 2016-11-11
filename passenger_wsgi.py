@@ -13,8 +13,9 @@ application.config.from_pyfile('config.py')
 @application.route('/login')
 def login():
     return render_template("login.html")
+
 @application.route('/')
-def login():
+def index():
     return render_template("index.html")
 
 '''

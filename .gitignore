@@ -1,2 +1,3 @@
 instance/
+instance/config.py
 passenger_wsgi.pyc

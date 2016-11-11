@@ -20,4 +20,6 @@ def index():
 def register():
     return render_template("registration.html")
 
-
+@application.route('/register', methods=["POST"]))
+def register():
+    return request.form

@@ -9,8 +9,7 @@ sys.path.append(os.getcwd())
 
 from flask import Flask, render_template, request
 from flask_mail import Mail
-from flask_sqlalchemy import SQLAlchemy
-from flask_user import login_required, UserManager, UserMixin, SQLAlchemyAdapter
+#from flask_user import login_required, UserManager, UserMixin, SQLAlchemyAdapter
 
 application = Flask(__name__)
 application.config.from_object('config')
@@ -18,23 +17,12 @@ application.config.from_pyfile('config.py')
 
 ############## database setup ###################
 
-app.config['SQLALCHEMY_DATABASE_URI'] = app.config['DATABASE_CONNECTION']   
-db = SQLAlchemy(application)    
+from flaskext.mysql import MySQL
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True)
-    email = db.Column(db.String(120), unique=True)
-
-    def __init__(self, username, email):
-        self.username = username
-        self.email = email
-
-    def __repr__(self):
-        return '<User %r>' % self.username
-
-
-
+mysql = MySQL()
+mysql.init_app(app)
+conn = mysql.connect()
+cursor = conn.cursor()
 
 
 

@@ -28,7 +28,8 @@ db = SQLAlchemy(application)
 from model import *
 
 db_adapter = SQLAlchemyAdapter(db, User)        # Register the User model
-user_manager = UserManager(db_adapter, application)     # Initialize Flask-User
+user_manager = UserManager(db_adapter, application,register_form=MyRegisterForm)     # Initialize Flask-User
+
 ############## Routes ###################
 
 @application.route('/login',methods=["POST","GET"])

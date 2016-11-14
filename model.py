@@ -1,5 +1,7 @@
 from passenger_wsgi import db
 from flask_user import UserMixin
+from flask_user.forms import RegisterForm
+from wtforms import Form, BooleanField, StringField, PasswordField, validators
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -34,3 +36,12 @@ class UserRoles(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     user_id = db.Column(db.Integer(), db.ForeignKey('user.id', ondelete='CASCADE'))
     role_id = db.Column(db.Integer(), db.ForeignKey('role.id', ondelete='CASCADE'))    
+
+class MyRegisterForm(RegisterForm):
+    first_name = StringField('First name', validators=[validators.Required('First name is required')])
+    last_name  = StringField('Last name',  validators=[validators.Required('Last name is required')])
+    password  = PasswordField('Password',  validators=[validators.Required('Password is required')])
+    email = StringField('Email', validators=[validators.Required('An FM Email is required')]) 
+	
+
+

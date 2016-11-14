@@ -9,7 +9,7 @@ sys.path.append(os.getcwd())
 
 from flask import Flask, render_template, request
 from flask_mail import Mail
-#from flask_user import login_required #, UserManager, UserMixin, SQLAlchemyAdapter
+from flask_user import login_required , UserManager, UserMixin, SQLAlchemyAdapter
 
 application = Flask(__name__)
 application.config.from_pyfile('config.py')
@@ -17,15 +17,18 @@ application.config.from_pyfile('instance/config.py')
 
 ############## database setup ###################
 
-from flaskext.mysql import MySQL
+#from flaskext.mysql import MySQL
 
-mysql = MySQL()
-mysql.init_app(application)
-conn = mysql.connect()
-cursor = conn.cursor() 
+#mysql = MySQL()
+#mysql.init_app(application)
+#conn = mysql.connect()
+#cursor = conn.cursor() 
+from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy(application)
+from model import *
 
-
-
+db_adapter = SQLAlchemyAdapter(db, User)        # Register the User model
+user_manager = UserManager(db_adapter, application)     # Initialize Flask-User
 ############## Routes ###################
 
 @application.route('/login',methods=["POST","GET"])

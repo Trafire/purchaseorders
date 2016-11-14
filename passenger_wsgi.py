@@ -12,7 +12,7 @@ from flask_mail import Mail
 #from flask_user import login_required #, UserManager, UserMixin, SQLAlchemyAdapter
 
 application = Flask(__name__)
-application.config.from_object('config')
+application.config.from_pyfile('config.py')
 application.config.from_pyfile('instance/config.py')
 
 ############## database setup ###################

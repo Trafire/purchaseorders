@@ -18,6 +18,9 @@ application.config.from_pyfile('config.py')
 
 ############## database setup ###################
 
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_CONNECTION   
+db = SQLAlchemy(application)    
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
@@ -31,8 +34,7 @@ class User(db.Model):
         return '<User %r>' % self.username
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_CONNECTION   
-db = SQLAlchemy(application)    
+
 
 
 

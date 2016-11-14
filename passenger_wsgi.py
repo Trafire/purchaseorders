@@ -9,7 +9,7 @@ sys.path.append(os.getcwd())
 
 from flask import Flask, render_template, request
 from flask_mail import Mail
-from flask_user import login_required #, UserManager, UserMixin, SQLAlchemyAdapter
+#from flask_user import login_required #, UserManager, UserMixin, SQLAlchemyAdapter
 
 application = Flask(__name__)
 application.config.from_object('config')
@@ -57,7 +57,7 @@ def register():
         return render_template("registration.html")
 
 @application.route('/members')
-@login_required
+#@login_required
 def members_page():
     return render_template_string("members.html")
 

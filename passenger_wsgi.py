@@ -9,20 +9,20 @@ sys.path.append(os.getcwd())
 
 from flask import Flask, render_template, request
 from flask_mail import Mail
-#from flask_user import login_required, UserManager, UserMixin, SQLAlchemyAdapter
+from flask_user import login_required #, UserManager, UserMixin, SQLAlchemyAdapter
 
 application = Flask(__name__)
 application.config.from_object('config')
-application.config.from_pyfile('config.py')
+application.config.from_pyfile('instance/config.py')
 
 ############## database setup ###################
 
 from flaskext.mysql import MySQL
 
 mysql = MySQL()
-mysql.init_app(app)
+mysql.init_app(application)
 conn = mysql.connect()
-cursor = conn.cursor()
+cursor = conn.cursor() 
 
 
 

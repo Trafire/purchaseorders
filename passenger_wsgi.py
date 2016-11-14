@@ -42,7 +42,7 @@ def login():
 @application.route('/')
 def index():
     return render_template("index.html")
-
+'''
 @application.route('/register', methods=["POST","GET"])
 def register():
     error = None
@@ -57,8 +57,22 @@ def register():
         if error:    
             return render_template("failure.html", error=error)
         return render_template("register.html",name=name,email=email,psw=psw)
+        
     else:
         return render_template("registration.html")
+'''
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm(request.form)
+    if request.method == 'POST' and form.validate():
+        user = User(form.username.data, form.email.data,
+                    form.password.data)
+        db_session.add(user)
+        flash('Thanks for registering')
+        return redirect(url_for('login'))
+    return render_template('register.html', form=form)
+            
 
 @application.route('/members')
 #@login_required

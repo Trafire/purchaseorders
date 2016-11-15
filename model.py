@@ -37,13 +37,10 @@ class UserRoles(db.Model):
     user_id = db.Column(db.Integer(), db.ForeignKey('user.id', ondelete='CASCADE'))
     role_id = db.Column(db.Integer(), db.ForeignKey('role.id', ondelete='CASCADE'))    
 
-def company_check(form,field):
-    if field.data[-15:] != "@fleurametz.com":
-        raise ValidationError('Must register with a fleurametz.com email')
 
 class MyRegisterForm(RegisterForm):
-    first_name = StringField('First Name', validators=[validators.Required('First name is required')])
-    last_name  = StringField('Last Name', validators=[validators.Required('Last name is required')])
+   # first_name = StringField('First Name', validators=[validators.Required('First name is required')])
+   # last_name  = StringField('Last Name', validators=[validators.Required('Last name is required')])
     password  = PasswordField('New Password', [
         validators.DataRequired(),
         validators.EqualTo('confirm', message='Passwords must match')

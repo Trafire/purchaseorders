@@ -46,7 +46,7 @@ def index():
 @application.route('/register', methods=['GET', 'POST'])
 def register():
     form = MyRegisterForm(request.form)
-    if request.method == 'POST': #and form.validate():
+    if request.method == 'POST' and form.validate():
         user = User(first_name=form.first_name.data, last_name=form.last_name.data, username=form.username.data, email=form.email.data,
                     password=form.password.data)
         db.session.add(user)

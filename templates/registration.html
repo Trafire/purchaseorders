@@ -5,20 +5,20 @@
 
 {% block main %}
 
-<h1>Create New User</h1>
+{% from "_formhelpers.html" import render_field %}
+<form method=POST action="/register">
+  <dl>
+	
+    {{ render_field(form.first_name) }}
+    {{ render_field(form.last_name) }}
+    {{ render_field(form.username) }}
+    {{ render_field(form.email) }}
+    {{ render_field(form.password) }}
+    {{ render_field(form.confirm) }}
 
-<form name="loginForm" method="POST" action="/register">
-    <label>name: </label>
-    <input required type="text" name="name"><br>
-    
-    <label>Email: </label>
-    <input required type="email" name="email"><br>
-
-    <label>Password: </label>
-    <input required type="password" name="psw"><br>
-
-    <input type="submit">
-
+ 
+  </dl>
+  <p><input type=submit value=Register>
 </form>
 
 {% endblock %}

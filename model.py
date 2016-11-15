@@ -39,8 +39,8 @@ class UserRoles(db.Model):
 
 
 class MyRegisterForm(RegisterForm):
-   # first_name = StringField('First Name', validators=[validators.Required('First name is required')])
-   # last_name  = StringField('Last Name', validators=[validators.Required('Last name is required')])
+    first_name = StringField('First Name', validators=[validators.Required('First name is required')])
+    last_name  = StringField('Last Name', validators=[validators.Required('Last name is required')])
     password  = PasswordField('New Password', [
         validators.DataRequired(),
         validators.EqualTo('confirm', message='Passwords must match')

@@ -1,7 +1,8 @@
-from passenger_wsgi import db
+from passenger_wsgi import db, bcrypt
 from flask_user import UserMixin
 from flask_user.forms import RegisterForm
 from wtforms import Form, BooleanField, StringField, PasswordField, validators
+from sqlalchemy.ext.hybrid import hybrid_property
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -26,6 +27,8 @@ class User(db.Model, UserMixin):
 
     def is_active(self):
       return self.is_enabled
+
+
 
 # Define the Role DataModel
 class Role(db.Model):

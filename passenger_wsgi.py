@@ -10,10 +10,12 @@ sys.path.append(os.getcwd())
 from flask import Flask, render_template, request,redirect, url_for, flash
 from flask_mail import Mail
 from flask_user import login_required , UserManager, UserMixin, SQLAlchemyAdapter
+from flask_bcrypt import Bcrypt
 
 application = Flask(__name__)
 application.config.from_pyfile('config.py')
 application.config.from_pyfile('instance/config.py')
+bcrypt = Bcrypt(application)
 
 ############## database setup ###################
 
@@ -48,9 +50,11 @@ def register():
     form = MyRegisterForm(request.form)
     if request.method == 'POST':# and form.validate():
         user = User(first_name=form.first_name.data, last_name=form.last_name.data, username=form.username.data, email=form.email.data,password=form.password.data)
+#	return "after user"
         db.session.add(user)
 	db.session.commit()
-   #     flash('Thanks for registering')
+
+        flash('Thanks for registering')
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
             

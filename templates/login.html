@@ -5,15 +5,20 @@
 
 {% block main %}
 
-<form name="loginForm" method="POST" action="/login">
-    <label>Email: </label>
-    <input required type="email" name="email"><br>
+{% from "_formhelpers.html" import render_field %}
 
-    <label>Password: </label>
-    <input required type="password" name="psw"><br>
+<form method=POST action="/login">
+  <dl>
 
-    <input type="submit">
+    {{ render_field(form.username) }}
+    {{ render_field(form.password) }}
 
+
+
+  </dl>
+  <p><input type=submit value=login>
 </form>
+
+
 
 {% endblock %}

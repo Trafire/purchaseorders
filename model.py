@@ -24,7 +24,9 @@ class User(db.Model, UserMixin):
     # Relationships
     roles = db.relationship('Role', secondary='user_roles',
             backref=db.backref('users', lazy='dynamic'))
-
+    
+    purchaseOrders = db.relationship('PurchaseOrders', 
+            backref=db.backref('users', lazy='dynamic'))
     def is_active(self):
       return self.is_enabled
 
@@ -42,6 +44,17 @@ class User(db.Model, UserMixin):
 
         return False
 
+class Suppliers(db.model):
+    id = db.Column(db.Integer, primary_key=True)
+    supplier_name = db.Column(db.String(50), nullable=False, unique=True)
+
+
+class PurchaseOrders(db.model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+     
+
+    
 
 
 # Define the Role DataModel

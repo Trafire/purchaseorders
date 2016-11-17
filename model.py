@@ -50,7 +50,7 @@ class Suppliers(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     supplier_name = db.Column(db.String(50), nullable=False, unique=True)
     purchaseorders = db.relationship('PurchaseOrders', 
-            backref=db.backref('suppliers', lazy='dynamic')
+            backref=db.backref('suppliers', lazy='dynamic'))
 
 class PurchaseOrders(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -58,10 +58,7 @@ class PurchaseOrders(db.Model):
     authorizing_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     invoice_date = db.Column(db.DateTime)
     suppliers_id = db.Column(db.Integer, db.ForeignKey('suppliers.id'))
-    price = db.Column(db.Numeric, nullable=False)
-    quantity = db.Column(db.Integer, nullable=False)
-    client = db.Column(db.String(255))
-    status = db.Column(db.Integer)
+    
 
     purchases = db.relationship('Purchases', 
             backref=db.backref('purchaseorders', lazy='dynamic')
@@ -72,26 +69,30 @@ class Purchases(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     purchase_orders = db.Column(db.Integer, db.ForeignKey('purchase_orders.id'))
     Items_id = db.Column(db.Integer, db.ForeignKey('items.id'))
+    price = db.Column(db.Numeric, nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
+    client = db.Column(db.String(255))
+    status = db.Column(db.Integer)
 
 class Categories(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     category_name = db.Column(db.String(50), unique=True)
     items = db.relationship('Items', 
-            backref=db.backref('Categories', lazy='dynamic')
+            backref=db.backref('Categories', lazy='dynamic'))
 
 class Products(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     product_name = db.Column(db.String(50), unique=True)
     items = db.relationship('Items', 
-            backref=db.backref('Products', lazy='dynamic')
+            backref=db.backref('Products', lazy='dynamic'))
     
 class Items(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    Products_id = db.Column(db.Integer, db.ForeignKey('product.id'))
+    Products_id = db.Column(db.Integer, db.ForeignKey('products.id'))
     Categories_id = db.Column(db.Integer, db.ForeignKey('categories.id'))  
     grade = db.Column(db.String(25))
     purchases = db.relationship('Purchases', 
-            backref=db.backref('Items', lazy='dynamic')
+            backref=db.backref('Items', lazy='dynamic'))
     
     
                      
